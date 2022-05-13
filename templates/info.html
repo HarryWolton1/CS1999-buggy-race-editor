@@ -1,10 +1,22 @@
-<h1>
-    Info
-</h1>
+{% extends "base.html" %}
 
-<h2>
-    Link to the website where the buggy specifications and race rules can be found
-</h2>
-<p>
-    https://rhul.buggyrace.net/specs/
-</p>
+{% block content %}
+    <head>
+        <meta charset="utf-8" />
+        <link href="static/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+    </head>
+
+    <h1>Info page</h1>
+    <br>
+
+    <a href="https://rhul.buggyrace.net/specs/" class="button">link to website with buggy specifications and rules</a>
+    <br><br><br>
+    <a href="/" class="button">return home</a>
+    <br><br><br>
+    
+    <p>
+        {{ power }}
+    </p>
+  
+
+{% endblock %}

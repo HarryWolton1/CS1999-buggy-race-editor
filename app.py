@@ -1,6 +1,9 @@
+from cgitb import reset
 from flask import Flask, render_template, request, jsonify
 import os
 import sqlite3 as sql
+import requests
+from bs4 import BeautifulSoup
 
 # app - The flask application where all the magical things are configured.
 app = Flask(__name__)
@@ -16,6 +19,59 @@ BUGGY_RACE_SERVER_URL = "https://rhul.buggyrace.net"
 @app.route('/')
 def home():
     return render_template('index.html', server_url=BUGGY_RACE_SERVER_URL)
+
+#------------------------------------------------------------
+# the info page
+#------------------------------------------------------------
+@app.route('/info')
+def show_info():
+    res = requests.get(
+       'https://rhul.buggyrace.net/specs/data?extra=mass'
+    )
+    soup = BeautifulSoup(res.content, 'html.parser')
+
+    #scrapes power table from https://rhul.buggyrace.net/specs/data?extra=mass
+    power_header = soup.find('h3', {'id':'type-power_type'}) 
+    power_table = power_header.find_next('table')
+    power = power_table
+
+    #scrapes tyre table from https://rhul.buggyrace.net/specs/data?extra=mass
+    tyre_header = soup.find('h3', {'id':'type-tyres'})
+    tyre_table = tyre_header.find_next('table')
+    tyre = tyre_table
+
+    #scrapes armour table from https://rhul.buggyrace.net/specs/data?extra=mass
+    armour_header = soup.find('h3', {'id':'type-armour'})
+    armour_table = armour_header.find_next('table')
+    armour = armour_table
+
+    #scrapes attack table from https://rhul.buggyrace.net/specs/data?extra=mass
+    attack_header = soup.find('h3', {'id':'type-attack'})
+    attack_table = attack_header.find_next('table')
+    attack = attack_table
+
+    #scrapes algo table from https://rhul.buggyrace.net/specs/data?extra=mass
+    algo_header = soup.find('h3', {'id':'type-algo'})
+    algo_table = algo_header.find_next('table')
+    algo = algo_table
+
+    #scrapes flag-pattern table from https://rhul.buggyrace.net/specs/data?extra=mass
+    flag_pattern_header = soup.find('h3', {'id':'type-flag_pattern'})
+    flag_pattern_table = flag_pattern_header.find_next('table')
+    flag_pattern = flag_pattern_table
+
+    #scrapes special table from https://rhul.buggyrace.net/specs/data?extra=mass
+    special_header = soup.find('h3', {'id':'type-special'})
+    special_table = special_header.find_next('table')
+    special = special_table
+
+    #scrapes defaults table from https://rhul.buggyrace.net/specs/data?extra=mass
+    defaults_header = soup.find('h2', {'id':'defaults'})
+    defaults_table = defaults_header.find_next('table')
+    defaults = defaults_table
+
+    return render_template("info.html", power=power, tyre=tyre, armour=armour, attack=attack, algo=algo, flag_pattern=flag_pattern, special=special)
+
 
 #------------------------------------------------------------
 # creating a new buggy:
