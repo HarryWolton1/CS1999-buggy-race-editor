@@ -70,7 +70,7 @@ def show_info():
     defaults_table = defaults_header.find_next('table')
     defaults = defaults_table
 
-    return render_template("info.html", power=power, tyre=tyre, armour=armour, attack=attack, algo=algo, flag_pattern=flag_pattern, special=special)
+    return render_template("info.html", power=power, tyre=tyre, armour=armour, attack=attack, algo=algo, flag_pattern=flag_pattern, special=special, defaults=defaults)
 
 
 #------------------------------------------------------------
