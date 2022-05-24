@@ -4,20 +4,35 @@
     <head>
         <meta charset="utf-8" />
         <link href="static/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="static/script.js"></script>
     </head>
 
     <h1>Info page</h1>
     <br>
-
+    
+    <!-- Button with a link to the page on the buggy race server which contains the buggy specification and rules. -->
     <a href="https://rhul.buggyrace.net/specs/" class="button">link to website with buggy specifications and rules</a>
     <br><br><br>
+    <!-- Button to return to index.html -->
     <a href="/" class="button">return home</a>
     <br><br><br>
-    
-    
-    
-    
-    
   
+    <!-- drop down menu that allows the user to select which table is displayed -->
+    <select id='table_select' onchange="change_table(this.value)">
+        <option value="placeholder">Choose a table</option> <!-- placeholder value to display when no option is selected -->
+
+        <option value="algo">algorithm</option>
+        <option value="armour">armour</option>
+        <option value="attack">attack</option>
+        <option value="flag">flag pattern</option>
+        <option value="power_type">Power type</option>
+        <option value="special">special</option>
+        <option value="tyres">tyres</option>
+
+    </select>
+
+    <p id="table"></p>
+  
+
 
 {% endblock %}

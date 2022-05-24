@@ -2,8 +2,9 @@ from cgitb import reset
 from flask import Flask, render_template, request, jsonify
 import os
 import sqlite3 as sql
-import requests
-from bs4 import BeautifulSoup
+from urllib.request import urlopen 
+import json
+
 
 # app - The flask application where all the magical things are configured.
 app = Flask(__name__)
@@ -25,11 +26,18 @@ def home():
 #------------------------------------------------------------
 @app.route('/info')
 def show_info():
-    # gets the info json file from https://rhul.buggyrace.net/specs/data/types.json on the buggy race server
-    info = requests.get('https://rhul.buggyrace.net/specs/data/types.json')
-    #prints the json file (for testing)
-    print(info.json())
     return render_template("info.html")
+
+#------------------------------------------------------------
+# getting the specifications from the buggy race server
+#------------------------------------------------------------
+@app.route('/specs')
+def show_specs():
+   url = 'https://rhul.buggyrace.net/specs/data/types.json' #sets the url as the page where the json output of the specs can be found
+   json_url = urlopen(url) #opens the url
+   specs = json.loads(json_url.read()) # puts the json response from the web page as a variable
+   return specs #returns the json object
+
 
 
 #------------------------------------------------------------
@@ -105,52 +113,3 @@ if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=alloc_port)
 
 
-# start of a function to scrape the data off 'https://rhul.buggyrace.net/specs/data'.
-#Unfinished and obselete as I used the JSON output from the server to create the table instead
-def web_scraper():
-    res = requests.get(
-       'https://rhul.buggyrace.net/specs/data?extra=mass'
-    )
-    soup = BeautifulSoup(res.content, 'html.parser')
-
-    #scrapes power table from https://rhul.buggyrace.net/specs/data?extra=mass
-    power_header = soup.find('h3', {'id':'type-power_type'}) 
-    power_table = power_header.find_next('table')
-    power = power_table
-
-    #scrapes tyre table from https://rhul.buggyrace.net/specs/data?extra=mass
-    tyre_header = soup.find('h3', {'id':'type-tyres'})
-    tyre_table = tyre_header.find_next('table')
-    tyre = tyre_table
-
-    #scrapes armour table from https://rhul.buggyrace.net/specs/data?extra=mass
-    armour_header = soup.find('h3', {'id':'type-armour'})
-    armour_table = armour_header.find_next('table')
-    armour = armour_table
-
-    #scrapes attack table from https://rhul.buggyrace.net/specs/data?extra=mass
-    attack_header = soup.find('h3', {'id':'type-attack'})
-    attack_table = attack_header.find_next('table')
-    attack = attack_table
-
-    #scrapes algo table from https://rhul.buggyrace.net/specs/data?extra=mass
-    algo_header = soup.find('h3', {'id':'type-algo'})
-    algo_table = algo_header.find_next('table')
-    algo = algo_table
-
-    #scrapes flag-pattern table from https://rhul.buggyrace.net/specs/data?extra=mass
-    flag_pattern_header = soup.find('h3', {'id':'type-flag_pattern'})
-    flag_pattern_table = flag_pattern_header.find_next('table')
-    flag_pattern = flag_pattern_table
-
-    #scrapes special table from https://rhul.buggyrace.net/specs/data?extra=mass
-    special_header = soup.find('h3', {'id':'type-special'})
-    special_table = special_header.find_next('table')
-    special = special_table
-
-    #scrapes defaults table from https://rhul.buggyrace.net/specs/data?extra=mass
-    defaults_header = soup.find('h2', {'id':'defaults'})
-    defaults_table = defaults_header.find_next('table')
-    defaults = defaults_table
-
-    return power, tyre, armour, attack, algo, flag_pattern, special, defaults
