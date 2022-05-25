@@ -31,13 +31,17 @@ def show_info():
 #------------------------------------------------------------
 # getting the specifications from the buggy race server
 #------------------------------------------------------------
-@app.route('/specs')
+@app.route('/specs', methods = ['GET'])
 def show_specs():
-   url = 'https://rhul.buggyrace.net/specs/data/types.json' #sets the url as the page where the json output of the specs can be found
-   json_url = urlopen(url) #opens the url
-   specs = json.loads(json_url.read()) # puts the json response from the web page as a variable
-   return specs #returns the json object
-
+    print("show_specs has been initiated") # prints that the api has been ititiated for debugging
+    if request.method == 'GET' :
+        print("GET initiated") #prints that the GET part has been initiated for debugging 
+        url = 'https://rhul.buggyrace.net/specs/data/types.json' #sets the url as the page where the json output of the specs can be found
+        json_url = urlopen(url) #opens the url
+        specs = json.loads(json_url.read()) # puts the json response from the web page as a variable
+        return specs #returns the json object
+    else:
+        return "This method only accepts GET" # returns that only GET is accepted for debugging
 
 
 #------------------------------------------------------------

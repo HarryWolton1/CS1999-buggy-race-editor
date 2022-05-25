@@ -62,3 +62,15 @@ table td, table th {
 .spacer {
   margin: 3em 0;
 }
+
+/* info.html styles */ 
+/* changes the style of the selection box on the info.html page */ 
+.table_select {
+  border-radius: 25px ;
+  border: 2px solid black ; 
+}
+
+/* changes the style for the table on info.html */
+.specs_table {
+  border-radius: 25px ;
+}
