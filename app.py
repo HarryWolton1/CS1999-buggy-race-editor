@@ -1,4 +1,5 @@
 from cgitb import reset
+from tkinter import W
 from flask import Flask, render_template, request, jsonify
 import os
 import sqlite3 as sql
@@ -55,14 +56,35 @@ def create_buggy():
         return render_template("buggy-form.html")
     elif request.method == 'POST':
         msg=""
+        
+        #assigns variables with the data of the form
+        #wheel attibutes
         qty_wheels = request.form['qty_wheels']
+        qty_wheels = qty_wheels.strip()
+        wheel_type = request.form['wheel_type']
+        wheel_type = wheel_type.strip()
+        #flag attributes
+        flag_color = request.form['flag_color']
+        flag_color = flag_color.strip()
+        flag_color_secondary = request.form['flag_color_secondary']
+        flag_color_secondary = flag_color_secondary.strip()
+        flag_pattern = request.form['flag_pattern']
+        flag_pattern = flag_pattern.strip()
+        
+        #checks if qty_wheels is a number
+        if qty_wheels.isdigit() == False:
+            msg = "wheel quantity should be a number"
+            return msg
+
+
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE buggies set qty_wheels=? WHERE id=?",
-                    (qty_wheels, DEFAULT_BUGGY_ID)
+                    "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=? WHERE id=?",
+                    (qty_wheels, flag_color, flag_color_secondary, flag_pattern, DEFAULT_BUGGY_ID)
                 )
+
                 con.commit()
                 msg = "Record successfully saved"
         except:
