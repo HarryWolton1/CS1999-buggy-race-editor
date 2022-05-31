@@ -6,13 +6,13 @@
 
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" />
+    <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }}/>
     <label for="wheel_type">type of wheel:</label>
     <input type="text" name="wheel_type" />
     <br><br>
 
     <label for="flag_color">Primary flag color:</label>
-    <input type="text" name="flag_color" />
+    <input type="text" name="flag_color" value={{ buggy['flag_color'] }}/>
     <label for="flag_color_secondary">Secondary flag color:</label>
     <input type="text" name="flag_color_secondary" />
     <label for="flag_pattern">flag pattern:</label>
