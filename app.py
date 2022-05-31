@@ -61,13 +61,14 @@ def create_buggy():
         return render_template("buggy-form.html", buggy = record)
     elif request.method == 'POST':
         msg=""
-        
+        max_price = 100 #sets the max price (currently set to 100 as i cannot find the proper value)
+
         #assigns variables with the data of the form
         #wheel attibutes
         qty_wheels = request.form['qty_wheels']
         qty_wheels = qty_wheels.strip()
-        wheel_type = request.form['wheel_type']
-        wheel_type = wheel_type.strip()
+        tyre = request.form['tyre']
+        tyre = tyre.strip()
         #flag attributes
         flag_color = request.form['flag_color']
         flag_color = flag_color.strip()
@@ -76,6 +77,20 @@ def create_buggy():
         flag_pattern = request.form['flag_pattern']
         flag_pattern = flag_pattern.strip()
         
+        #checks the price is below the max.
+        url = 'https://rhul.buggyrace.net/specs/data/types.json' #sets the url as the page where the json output of the specs can be found
+        json_url = urlopen(url) #opens the url
+        specs = json.loads(json_url.read()) # puts the json response from the web page as a variable
+        price = 0 # sets the intitial price to 0
+        price_per_tyre = specs[tyre]['cost'] #calculates price per tyre by looking for the tyre cost in the json object
+        tyre_cost = price_per_tyre * qty_wheels #calculates the cost of the tyres by multiplying the tyre price
+        price = tyre_cost + price # adds the tyre_cost to the total cost.
+
+        #checks that the price is lower than the max price.
+        if price > max_price:
+            msg = "this excedes the max price of the buggy"
+            return msg
+
         #checks if qty_wheels is a number
         if qty_wheels.isdigit() == False:
             msg = "wheel quantity should be a number"
@@ -86,8 +101,8 @@ def create_buggy():
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=? WHERE id=?",
-                    (qty_wheels, flag_color, flag_color_secondary, flag_pattern, DEFAULT_BUGGY_ID)
+                    "UPDATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=? WHERE id=?",
+                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, DEFAULT_BUGGY_ID)
                 )
 
                 con.commit()
