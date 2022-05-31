@@ -86,15 +86,21 @@ def create_buggy():
         tyre_cost = price_per_tyre * qty_wheels #calculates the cost of the tyres by multiplying the tyre price
         price = tyre_cost + price # adds the tyre_cost to the total cost.
 
-        #checks that the price is lower than the max price.
-        if price > max_price:
-            msg = "this excedes the max price of the buggy"
+        #checks number of wheels is even number
+        if qty_wheels % 2 != 0 :
+            msg = "wheel quantity must be even"
             return msg
 
         #checks if qty_wheels is a number
         if qty_wheels.isdigit() == False:
             msg = "wheel quantity should be a number"
             return msg
+
+        #checks that the price is lower than the max price.
+        if price > max_price:
+            msg = "this excedes the max price of the buggy"
+            return msg
+
 
 
         try:
