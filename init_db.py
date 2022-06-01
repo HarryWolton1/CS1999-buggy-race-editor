@@ -29,7 +29,12 @@ connection.execute("""
     tyres                 VARCHAR(20),
     flag_color            VARCHAR(20),
     flag_color_secondary  VARCHAR(20),
-    flag_pattern          VARCHAR(20)
+    flag_pattern          VARCHAR(20),
+    power_type            VARCHAR(20),
+    armour_type           VARCHAR(20),
+    attack                VARCHAR(20),
+    algo                  VARCHAR(20),
+    price                 INTEGER DEFAULT 4
   )
 
 """)

@@ -17,6 +17,7 @@ function get_specs() {
 // info.html
 //------------------------------------------------------------
 
+// this code is now not used as it will not work correctly
 // change_table script changes the table that is displayed on info.html
 function change_table(selected) {
     console.log("change_table has been initiated with " + selected) ; //output that the function has been initiated for debugging
@@ -39,5 +40,18 @@ function change_table(selected) {
         text =+ "</table>" ;
         document.getElementById("specs_table").innerHTML = text ;
     }
+
+}
+
+//------------------------------------------------------------
+// buggy_form.html
+//------------------------------------------------------------
+
+//function to autofill the table with standard values
+function autofill() {
+    console.log("autofill has been initiated with ") ; // output that the function has been initiated for debugging.
+    var wheel_quantity = 4 ; 
+
+    document.getElementsByName("qty_wheels").value = wheel_quantity ; // sets the value of wheel quantity to the default value
 
 }

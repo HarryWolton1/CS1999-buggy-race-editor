@@ -69,6 +69,7 @@ def create_buggy():
         qty_wheels = qty_wheels.strip()
         tyre = request.form['tyre']
         tyre = tyre.strip()
+
         #flag attributes
         flag_color = request.form['flag_color']
         flag_color = flag_color.strip()
@@ -86,15 +87,17 @@ def create_buggy():
         tyre_cost = price_per_tyre * qty_wheels #calculates the cost of the tyres by multiplying the tyre price
         price = tyre_cost + price # adds the tyre_cost to the total cost.
 
-        #checks number of wheels is even number
-        if qty_wheels % 2 != 0 :
-            msg = "wheel quantity must be even"
-            return msg
 
         #checks if qty_wheels is a number
         if qty_wheels.isdigit() == False:
             msg = "wheel quantity should be a number"
             return msg
+        #checks number of wheels is even number
+        if qty_wheels % 2 != 0 :
+            msg = "wheel quantity must be even"
+            return msg
+
+
 
         #checks that the price is lower than the max price.
         if price > max_price:
@@ -107,8 +110,8 @@ def create_buggy():
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=? WHERE id=?",
-                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, DEFAULT_BUGGY_ID)
+                    "UPDATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?, WHERE id=?",
+                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price, DEFAULT_BUGGY_ID)
                 )
 
                 con.commit()

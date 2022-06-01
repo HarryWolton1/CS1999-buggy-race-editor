@@ -4,7 +4,7 @@
 
   <h1>Make buggy</h1>
 
-  <form action="/new" method="post">
+  <form action="/new" method="post" id="buggy_form">
     <label for="qty_wheels">Number of wheels:</label>
     <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }}/>
     <label for="tyre">type of wheel:</label>
@@ -21,6 +21,8 @@
     <br>
     <input type="submit" class="button">
   </form>
+  <button class="button" onclick="autofill()">autofill</button>
+
 
   <p>
     <a href="/" class="button">home</a>
