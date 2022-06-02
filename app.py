@@ -1,5 +1,5 @@
 from cgitb import reset
-from tkinter import W
+from tkinter import *
 from flask import Flask, render_template, request, jsonify
 import os
 import sqlite3 as sql

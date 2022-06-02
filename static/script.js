@@ -51,7 +51,13 @@ function change_table(selected) {
 function autofill() {
     console.log("autofill has been initiated with ") ; // output that the function has been initiated for debugging.
     var wheel_quantity = 4 ; 
+    var tyre = "" ;
 
-    document.getElementsByName("qty_wheels").value = wheel_quantity ; // sets the value of wheel quantity to the default value
-
+    if (document.getElementsByName("qty_wheels") = "") { // checks if the value of wheel quantity in the form is empty
+        document.getElementsByName("qty_wheels").value = wheel_quantity ; // sets the value of wheel quantity to the default value
+    }
+    if (document.getElementsByName("tyre") = "") { // checks if the value of tyre in the form is empty
+        document.getElementsByName("tyre").value = tyre ; // sets the value of tyre quantity to the default value
+    }
+    
 }
