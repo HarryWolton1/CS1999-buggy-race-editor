@@ -104,7 +104,7 @@ def create_buggy():
             msg = "this excedes the max price of the buggy"
             return msg
 
-
+        
 
         try:
             with sql.connect(DATABASE_FILE) as con:

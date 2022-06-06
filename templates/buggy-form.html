@@ -3,6 +3,11 @@
 {% block content %}
 
   <h1>Make buggy</h1>
+  <script>buggy_list(buggy)</script>
+
+
+  <div id="buggy_select"> <!-- div where the dropdown menu to select the buggy is contained --> 
+  </div>
 
   <form action="/new" method="post" id="buggy_form">
     <label for="qty_wheels">Number of wheels:</label>

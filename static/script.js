@@ -72,3 +72,17 @@ function autofill() {
         document.getElementsByName("flag_pattern").value = flag_pattern ; // sets the value of flag pattern to the default value
     }
 }
+
+
+// function to add the dropdown menu of buggy id
+function buggy_list(buggy) {
+    var index = buggy[id] ; // sets index to be the id column of the buggies column
+    var text = "<select id='buggy_select'>" ; // creates the variable text which contains the html for the dropdown menu
+
+    for (i in index) { //increments through all the id's in the buggy table
+        text =+ "<option value='" + i + "'>" + i + "</option>" ; // adds the row to the dropdown
+    }
+
+    text =+ "</select>"
+    document.getElementById("buggy_select").innerHTML = text ; // adds the text into the html page
+}
