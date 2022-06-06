@@ -51,10 +51,10 @@ function change_table(selected) {
 function autofill() {
     console.log("autofill has been initiated with ") ; // output that the function has been initiated for debugging.
     var wheel_quantity = 4 ; 
-    var tyre = "" ;
-    var flag_color = "" ; 
-    var flag_color_secondary = "" ; 
-    var flag_pattern = "" ; 
+    var tyre = "knobbly" ;
+    var flag_color = "white" ; 
+    var flag_color_secondary = "black" ; 
+    var flag_pattern = "plain" ; 
 
     if (document.getElementsByName("qty_wheels") = "") { // checks if the value of wheel quantity in the form is empty
         document.getElementsByName("qty_wheels").value = wheel_quantity ; // sets the value of wheel quantity to the default value
