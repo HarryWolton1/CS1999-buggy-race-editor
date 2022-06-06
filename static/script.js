@@ -52,6 +52,9 @@ function autofill() {
     console.log("autofill has been initiated with ") ; // output that the function has been initiated for debugging.
     var wheel_quantity = 4 ; 
     var tyre = "" ;
+    var flag_color = "" ; 
+    var flag_color_secondary = "" ; 
+    var flag_pattern = "" ; 
 
     if (document.getElementsByName("qty_wheels") = "") { // checks if the value of wheel quantity in the form is empty
         document.getElementsByName("qty_wheels").value = wheel_quantity ; // sets the value of wheel quantity to the default value
@@ -59,5 +62,13 @@ function autofill() {
     if (document.getElementsByName("tyre") = "") { // checks if the value of tyre in the form is empty
         document.getElementsByName("tyre").value = tyre ; // sets the value of tyre quantity to the default value
     }
-    
+    if (document.getElementsByName("flag_color") = "") { // checks if the value of flag color in the form is empty
+        document.getElementsByName("flag_color").value = flag_color ; // sets the value of flag color to the default value
+    }
+    if (document.getElementsByName("flag_color_secondary") = "") { // checks if the value of flag color secondary in the form is empty
+        document.getElementsByName("flag_color_secondary").value = flag_color_secondary ; // sets the value of flag color secondary to the default value
+    }
+    if (document.getElementsByName("flag_pattern") = "") { // checks if the value of flag pattern in the form is empty
+        document.getElementsByName("flag_pattern").value = flag_pattern ; // sets the value of flag pattern to the default value
+    }
 }
