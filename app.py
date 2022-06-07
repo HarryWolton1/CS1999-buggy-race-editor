@@ -144,6 +144,14 @@ def edit_buggy():
     return render_template("buggy-form.html")
 
 #------------------------------------------------------------
+# links to the poster.html page
+#------------------------------------------------------------
+@app.route('/poster')
+def display_poster():
+    return render_template("poster.html")
+
+
+#------------------------------------------------------------
 # You probably don't need to edit this... unless you want to ;)
 #
 # get JSON from current record
