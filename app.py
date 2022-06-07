@@ -124,6 +124,25 @@ def create_buggy():
         return render_template("updated.html", msg = msg)
 
 #------------------------------------------------------------
+# a page for deleting buggies.
+#------------------------------------------------------------
+@app.route('/delete', methods = ['GET','DELETE']) 
+def delete_buggies():
+    print("delete_buggies initiated ")
+    if request.method == 'GET' :
+        print("intitiated with GET") 
+        con = sql.connect(DATABASE_FILE)
+        con.row_factory = sql.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM buggies")
+        record = cur.fetchone()
+        return render_template("delete.html", buggy = record)
+    elif request.method == 'DELETE' :
+        print("initiated with delete")
+
+
+
+#------------------------------------------------------------
 # a page for displaying the buggy
 #------------------------------------------------------------
 @app.route('/buggy')

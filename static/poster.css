@@ -1,3 +1,5 @@
+
+/* css file for the poster page. This uses a different css file as I want the poster styling to be different to the main website styling*/
 body {
     font-family: Tahoma, Verdana, sans-serif;
     background-color: azure;
@@ -5,6 +7,10 @@ body {
     margin-bottom: 20px; 
     margin-left: 50px;
     margin-right: 50p;
+}
+
+.features_list {
+    list-style-type: square;
 }
 
 h1 {
