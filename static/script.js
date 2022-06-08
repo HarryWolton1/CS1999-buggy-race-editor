@@ -74,10 +74,13 @@ function autofill() {
 }
 
 
+// not used as has been replaced with jinja
 // function to add the dropdown menu of buggy id
 function buggy_list(buggy) {
+    console.log("buggy_list() initiated with " + buggy)
     var index = buggy[id] ; // sets index to be the id column of the buggies column
     var text = "<select id='buggy_select'>" ; // creates the variable text which contains the html for the dropdown menu
+    text =+ "<option value='new'>New buggy</option>"
 
     for (i in index) { //increments through all the id's in the buggy table
         text =+ "<option value='" + i + "'>" + i + "</option>" ; // adds the row to the dropdown

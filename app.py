@@ -64,6 +64,9 @@ def create_buggy():
         max_price = 100 #sets the max price (currently set to 100 as i cannot find the proper value)
 
         #assigns variables with the data of the form
+        
+        buggy_select = request.form['buggy_select']
+        buggy_select.strip()
         #wheel attibutes
         qty_wheels = request.form['qty_wheels']
         qty_wheels = qty_wheels.strip()
@@ -105,23 +108,41 @@ def create_buggy():
             return msg
 
         
+        if buggy_select == 'new' : 
+            try:
+                with sql.connect(DATABASE_FILE) as con:
+                    cur = con.cursor()
+                    cur.execute(
+                        "CREATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?",
+                        (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price)
+                    )
 
-        try:
-            with sql.connect(DATABASE_FILE) as con:
-                cur = con.cursor()
-                cur.execute(
-                    "UPDATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?, WHERE id=?",
-                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price, DEFAULT_BUGGY_ID)
-                )
+                    con.commit()
+                    msg = "Record successfully saved"
+            except:
+                con.rollback()
+                msg = "error in update operation"
+            finally:
+                con.close()
+            return render_template("updated.html", msg = msg)
+        else:
+            try:
+                with sql.connect(DATABASE_FILE) as con:
+                    cur = con.cursor()
+                    cur.execute(
+                        "UPDATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?, WHERE id=?",
+                        (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price, buggy_select)
+                    )
 
-                con.commit()
-                msg = "Record successfully saved"
-        except:
-            con.rollback()
-            msg = "error in update operation"
-        finally:
-            con.close()
-        return render_template("updated.html", msg = msg)
+                    con.commit()
+                    msg = "Record successfully saved"
+            except:
+                con.rollback()
+                msg = "error in update operation"
+            finally:
+                con.close()
+            return render_template("updated.html", msg = msg)
+
 
 #------------------------------------------------------------
 # a page for deleting buggies.
@@ -162,12 +183,21 @@ def show_buggies():
 def edit_buggy():
     return render_template("buggy-form.html")
 
+@app.route('/updated')
+def update_buggy():
+    return render_template("updated.html")
+
 #------------------------------------------------------------
 # links to the poster.html page
 #------------------------------------------------------------
 @app.route('/poster')
 def display_poster():
-    return render_template("poster.html")
+    con = sql.connect(DATABASE_FILE)
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM buggies")
+    record = cur.fetchone(); 
+    return render_template("poster.html", buggy = record)
 
 
 #------------------------------------------------------------
