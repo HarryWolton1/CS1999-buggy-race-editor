@@ -84,7 +84,7 @@ def create_buggy():
             msg = "wheel quantity should be a number"
             return render_template("updated.html", msg = msg)
         #checks number of wheels is even number
-        if qty_wheels % 2 != 0 :
+        if (qty_wheels % 2) == 1 :
             msg = "wheel quantity must be even"
             return render_template("updated.html", msg = msg)
 
