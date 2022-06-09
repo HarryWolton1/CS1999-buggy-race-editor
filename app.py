@@ -111,7 +111,7 @@ def create_buggy():
         json_url = urlopen(url) #opens the url
         specs = json.loads(json_url.read()) # puts the json response from the web page as a variable
         price = 0 # sets the intitial price to 0
-        price_per_tyre = specs[tyre]['cost'] #calculates price per tyre by looking for the tyre cost in the json object
+        price_per_tyre = specs['tyres'][tyre]['cost'] #calculates price per tyre by looking for the tyre cost in the json object
         tyre_cost = price_per_tyre * qty_wheels #calculates the cost of the tyres by multiplying the tyre price
         price = tyre_cost + price # adds the tyre_cost to the total cost.
 
