@@ -122,13 +122,12 @@ def create_buggy():
             msg = "this excedes the max price of the buggy"
             return render_template("updated.html", msg = msg)
 
-        
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
                 cur.execute(
-                    "CREATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?",
-                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price)
+                    "UPDATE buggies set qty_wheels=?, tyres=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=? WHERE id=?" ,
+                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price, DEFAULT_BUGGY_ID)
                 )
 
                 con.commit()
