@@ -7,12 +7,13 @@
 
   <!-- <div id="buggy_select"> --> <!-- div where the dropdown menu to select the buggy is contained --> 
   <!--</div>-->
+  <!--
   <select name="buggy_select" id="buggy_select" >
   <option value="new">New</option>
   {% for id in buggy %}
     <option value={{buggy.id}}>{{ buggy.id }}</option>
   {% endfor %}
-  </select>
+  </select> -->
 
   <form action="/new" method="post" id="buggy_form">
     <label for="qty_wheels">Number of wheels:</label>
