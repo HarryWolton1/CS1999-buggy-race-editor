@@ -65,8 +65,6 @@ def create_buggy():
 
         #assigns variables with the data of the form
         
-        buggy_select = request.form['buggy_select']
-        buggy_select.strip()
         #wheel attibutes
         qty_wheels = request.form['qty_wheels']
         qty_wheels = qty_wheels.strip()
