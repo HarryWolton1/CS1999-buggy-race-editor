@@ -82,7 +82,14 @@ def create_buggy():
         #checks if qty_wheels is a number
         if not qty_wheels.isdigit():
             msg = "wheel quantity should be a number"
-            return render_template("updated.html", msg = msg)
+            con = sql.connect(DATABASE_FILE)
+            con.row_factory = sql.Row
+            cur = con.cursor()
+            cur.execute("SELECT * FROM buggies")
+            record = cur.fetchone()
+            return render_template("buggy-form.html", msg = msg, buggy = record)
+
+            
         #checks number of wheels is even number
         if (qty_wheels % 2) == 1 :
             msg = "wheel quantity must be even"

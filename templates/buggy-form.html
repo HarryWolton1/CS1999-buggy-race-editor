@@ -14,7 +14,8 @@
     <option value={{buggy.id}}>{{ buggy.id }}</option>
   {% endfor %}
   </select> -->
-
+  <p> {{ msg }} </p>
+  
   <form action="/new" method="post" id="buggy_form">
     <label for="qty_wheels">Number of wheels:</label>
     <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }}/>
