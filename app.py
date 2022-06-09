@@ -78,6 +78,17 @@ def create_buggy():
         flag_color_secondary = flag_color_secondary.strip()
         flag_pattern = request.form['flag_pattern']
         flag_pattern = flag_pattern.strip()
+
+        #checks if qty_wheels is a number
+        if not qty_wheels.isdigit():
+            msg = "wheel quantity should be a number"
+            return render_template("updated.html", msg = msg)
+        #checks number of wheels is even number
+        if qty_wheels % 2 != 0 :
+            msg = "wheel quantity must be even"
+            return render_template("updated.html", msg = msg)
+
+
         
         #checks the price is below the max.
         url = 'https://rhul.buggyrace.net/specs/data/types.json' #sets the url as the page where the json output of the specs can be found
@@ -87,16 +98,6 @@ def create_buggy():
         price_per_tyre = specs[tyre]['cost'] #calculates price per tyre by looking for the tyre cost in the json object
         tyre_cost = price_per_tyre * qty_wheels #calculates the cost of the tyres by multiplying the tyre price
         price = tyre_cost + price # adds the tyre_cost to the total cost.
-
-
-        #checks if qty_wheels is a number
-        if qty_wheels.isdigit() == False:
-            msg = "wheel quantity should be a number"
-            return render_template("updated.html", msg = msg)
-        #checks number of wheels is even number
-        if qty_wheels % 2 != 0 :
-            msg = "wheel quantity must be even"
-            return render_template("updated.html", msg = msg)
 
 
 
