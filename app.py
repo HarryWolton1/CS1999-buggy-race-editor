@@ -89,7 +89,7 @@ def create_buggy():
             record = cur.fetchone()
             return render_template("buggy-form.html", msg = msg, buggy = record)
 
-            
+
         #checks number of wheels is even number
         if (qty_wheels % 2) == 1 :
             msg = "wheel quantity must be even"
@@ -114,40 +114,22 @@ def create_buggy():
             return render_template("updated.html", msg = msg)
 
         
-        if buggy_select == 'new' : 
-            try:
-                with sql.connect(DATABASE_FILE) as con:
-                    cur = con.cursor()
-                    cur.execute(
-                        "CREATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?",
-                        (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price)
-                    )
+        try:
+            with sql.connect(DATABASE_FILE) as con:
+                cur = con.cursor()
+                cur.execute(
+                    "CREATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?",
+                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price)
+                )
 
-                    con.commit()
-                    msg = "Record successfully saved"
-            except:
-                con.rollback()
-                msg = "error in update operation"
-            finally:
-                con.close()
-            return render_template("updated.html", msg = msg)
-        else:
-            try:
-                with sql.connect(DATABASE_FILE) as con:
-                    cur = con.cursor()
-                    cur.execute(
-                        "UPDATE buggies set qty_wheels=?, tyre=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=?, WHERE id=?",
-                        (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price, buggy_select)
-                    )
-
-                    con.commit()
-                    msg = "Record successfully saved"
-            except:
-                con.rollback()
-                msg = "error in update operation"
-            finally:
-                con.close()
-            return render_template("updated.html", msg = msg)
+                con.commit()
+                msg = "Record successfully saved"
+        except:
+            con.rollback()
+            msg = "error in update operation"
+        finally:
+            con.close()
+        return render_template("updated.html", msg = msg)
 
 
 #------------------------------------------------------------
