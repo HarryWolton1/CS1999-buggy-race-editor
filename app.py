@@ -94,18 +94,18 @@ def create_buggy():
         #checks if qty_wheels is a number
         if qty_wheels.isdigit() == False:
             msg = "wheel quantity should be a number"
-            return msg
+            return render_template("updated.html", msg = msg)
         #checks number of wheels is even number
         if qty_wheels % 2 != 0 :
             msg = "wheel quantity must be even"
-            return msg
+            return render_template("updated.html", msg = msg)
 
 
 
         #checks that the price is lower than the max price.
         if price > max_price:
             msg = "this excedes the max price of the buggy"
-            return msg
+            return render_template("updated.html", msg = msg)
 
         
         if buggy_select == 'new' : 
