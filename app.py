@@ -79,6 +79,7 @@ def create_buggy():
         flag_pattern = request.form['flag_pattern']
         flag_pattern = flag_pattern.strip()
 
+
         #checks if qty_wheels is a number
         if not qty_wheels.isdigit():
             msg = "wheel quantity should be a number"
@@ -88,12 +89,20 @@ def create_buggy():
             cur.execute("SELECT * FROM buggies")
             record = cur.fetchone()
             return render_template("buggy-form.html", msg = msg, buggy = record)
+        else:
+            qty_wheels = int(qty_wheels)
 
 
         #checks number of wheels is even number
-        if (qty_wheels % 2) == 1 :
+        if (qty_wheels % 2) != 0 :
             msg = "wheel quantity must be even"
-            return render_template("updated.html", msg = msg)
+            con = sql.connect(DATABASE_FILE)
+            con.row_factory = sql.Row
+            cur = con.cursor()
+            cur.execute("SELECT * FROM buggies")
+            record = cur.fetchone()
+            return render_template("buggy-form.html", msg = msg, buggy = record)            
+
 
 
         
