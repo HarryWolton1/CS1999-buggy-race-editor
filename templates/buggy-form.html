@@ -20,8 +20,7 @@
   <p> {{ msg }} </p>
 
   <form action="/new" method="post" id="buggy_form">
-    <label for="id">Buggy ID:</label>
-    <input type="text" name="id" value="{{ buggy['id'] }}"/>   
+    <input type="hidden" name="id" value="{{ buggy['id'] }}"/>   
     <label for="qty_wheels">Number of wheels:</label>
     <input type="text" name="qty_wheels" value="{{ buggy['qty_wheels'] }}"/>
     <label for="tyre">type of wheel:</label>
