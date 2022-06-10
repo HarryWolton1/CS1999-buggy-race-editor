@@ -1,5 +1,6 @@
 from cgitb import reset
 from tkinter import *
+from typing import final
 from urllib import response
 from flask import Flask, render_template, request, jsonify
 import os
@@ -150,19 +151,27 @@ def create_buggy():
 #------------------------------------------------------------
 # a page for deleting buggies.
 #------------------------------------------------------------
-@app.route('/delete', methods = ['GET','DELETE']) 
-def delete_buggies():
+@app.route('/delete/<buggy_id>') 
+def delete_buggies(buggy_id):
     print("delete_buggies initiated ")
-    if request.method == 'GET' :
-        print("intitiated with GET") 
-        con = sql.connect(DATABASE_FILE)
-        con.row_factory = sql.Row
-        cur = con.cursor()
-        cur.execute("SELECT * FROM buggies")
-        record = cur.fetchone()
-        return render_template("delete.html", buggy = record)
-    elif request.method == 'DELETE' :
-        print("initiated with delete")
+    print("initiated with delete")
+    try:
+        with sql.connect(DATABASE_FILE) as con:
+            cur = con.cursor()
+            cur.execute(
+                "DELETE FROM buggies WHERE id=?", 
+                (buggy_id)
+            )
+            con.commit()
+            msg = "Record succesfully deleted"
+    except:
+        con.rollback()
+        msg = "error in update operation"
+    finally:
+        con.close() 
+
+    return render_template("delete.html", msg=msg)
+
 
 
 
