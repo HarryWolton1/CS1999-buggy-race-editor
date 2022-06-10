@@ -1,5 +1,6 @@
 from cgitb import reset
 from tkinter import *
+from urllib import response
 from flask import Flask, render_template, request, jsonify
 import os
 import sqlite3 as sql
@@ -53,7 +54,12 @@ def show_specs():
 @app.route('/new', methods = ['POST', 'GET'])
 def create_buggy():
     if request.method == 'GET':
-        return render_template("buggy-form.html", buggy = None)
+        url='https://rhul.buggyrace.net/specs/data/defaults.json' #url of the default buggy specs to pre fill in the form
+        json_url = urlopen(url) #opens the url
+        response = json.loads(json_url.read()) # puts the json response from the web page as a variable
+        return render_template("buggy-form.html", buggy=response)
+
+
     elif request.method == 'POST':
         msg=""
         max_price = 100 #sets the max price (currently set to 100 as i cannot find the proper value)

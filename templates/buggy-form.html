@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-  <h1>Make buggy</h1>
-
+  
+  {%if buggy['id']%}
+    <h1>Editing buggy #{{ buggy['id']}} </h1>
+  {%else%}
+    <h1>Make buggy</h1>
+  {%endif%}
 
   <!-- <div id="buggy_select"> --> <!-- div where the dropdown menu to select the buggy is contained --> 
   <!--</div>-->
@@ -18,19 +21,19 @@
 
   <form action="/new" method="post" id="buggy_form">
     <label for="id">Buggy ID:</label>
-    <input type="text" name="id" value={{ buggy['id'] }}/>   
+    <input type="text" name="id" value="{{ buggy['id'] }}"/>   
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }}/>
+    <input type="text" name="qty_wheels" value="{{ buggy['qty_wheels'] }}"/>
     <label for="tyre">type of wheel:</label>
-    <input type="text" name="tyre" value={{ buggy['tyres'] }}/>
+    <input type="text" name="tyre" value="{{ buggy['tyres'] }}"/>
     <br><br>
 
     <label for="flag_color">Primary flag color:</label>
-    <input type="text" name="flag_color" value={{ buggy['flag_color'] }}/>
+    <input type="text" name="flag_color" value="{{ buggy['flag_color'] }}"/>
     <label for="flag_color_secondary">Secondary flag color:</label>
-    <input type="text" name="flag_color_secondary" value={{ buggy['flag_color_secondary'] }}/>
+    <input type="text" name="flag_color_secondary" value="{{ buggy['flag_color_secondary'] }}"/>
     <label for="flag_pattern">flag pattern:</label>
-    <input type="text" name="flag_pattern" value={{ buggy['flag_pattern'] }}/>
+    <input type="text" name="flag_pattern" value="{{ buggy['flag_pattern'] }}"/>
     
     <br>
     <input type="submit" class="button">
