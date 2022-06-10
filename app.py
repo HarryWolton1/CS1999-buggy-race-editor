@@ -100,8 +100,8 @@ def create_buggy():
             con.row_factory = sql.Row
             cur = con.cursor()
             cur.execute("SELECT * FROM buggies")
-            record = cur.fetchone()
-            return render_template("buggy-form.html", msg = msg, buggy = record)            
+            records = cur.fetchall()
+            return render_template("buggy-form.html", msg = msg, buggies = records)            
 
 
 
@@ -126,10 +126,9 @@ def create_buggy():
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE buggies set qty_wheels=?, tyres=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=? WHERE id=?" ,
-                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price, DEFAULT_BUGGY_ID)
+                    "INSERT INTO buggies (qty_wheels, tyres, flag_color, flag_color_secondary, flag_pattern, price) VALUES (?,?,?,?,?,?)" ,
+                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price)
                 )
-
                 con.commit()
                 msg = "Record successfully saved"
         except:
@@ -168,8 +167,8 @@ def show_buggies():
     con.row_factory = sql.Row
     cur = con.cursor()
     cur.execute("SELECT * FROM buggies")
-    record = cur.fetchone(); 
-    return render_template("buggy.html", buggy = record)
+    record = cur.fetchall(); 
+    return render_template("buggy.html", buggies = record)
 
 #------------------------------------------------------------
 # a placeholder page for editing the buggy: you'll need

@@ -15,7 +15,7 @@
   {% endfor %}
   </select> -->
   <p> {{ msg }} </p>
-
+  
   <form action="/new" method="post" id="buggy_form">
     <label for="qty_wheels">Number of wheels:</label>
     <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }}/>
@@ -28,7 +28,7 @@
     <label for="flag_color_secondary">Secondary flag color:</label>
     <input type="text" name="flag_color_secondary" value={{ buggy['flag_color_secondary'] }}/>
     <label for="flag_pattern">flag pattern:</label>
-    <input type="text" name="flag_pattern" value=value={{ buggy['flag_pattern'] }}/>
+    <input type="text" name="flag_pattern" value={{ buggy['flag_pattern'] }}/>
     
     <br>
     <input type="submit" class="button">
