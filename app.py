@@ -53,18 +53,14 @@ def show_specs():
 @app.route('/new', methods = ['POST', 'GET'])
 def create_buggy():
     if request.method == 'GET':
-        con = sql.connect(DATABASE_FILE)
-        con.row_factory = sql.Row
-        cur = con.cursor()
-        cur.execute("SELECT * FROM buggies")
-        record = cur.fetchone()
-        return render_template("buggy-form.html", buggy = record)
+        return render_template("buggy-form.html", buggy = None)
     elif request.method == 'POST':
         msg=""
         max_price = 100 #sets the max price (currently set to 100 as i cannot find the proper value)
 
         #assigns variables with the data of the form
-        
+        buggyID = request.form['id']
+        buggyID = buggyID.strip()
         #wheel attibutes
         qty_wheels = request.form['qty_wheels']
         qty_wheels = qty_wheels.strip()
@@ -125,10 +121,16 @@ def create_buggy():
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
-                cur.execute(
-                    "INSERT INTO buggies (qty_wheels, tyres, flag_color, flag_color_secondary, flag_pattern, price) VALUES (?,?,?,?,?,?)" ,
-                    (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price)
-                )
+                if buggyID:
+                    cur.execute(
+                        "UPDATE buggies set qty_wheels=?, tyres=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, price=? WHERE id=?" ,
+                        (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price, buggyID)
+                    )
+                else:
+                    cur.execute(
+                        "INSERT INTO buggies (qty_wheels, tyres, flag_color, flag_color_secondary, flag_pattern, price) VALUES (?,?,?,?,?,?)" ,
+                        (qty_wheels, tyre, flag_color, flag_color_secondary, flag_pattern, price)
+                    )
                 con.commit()
                 msg = "Record successfully saved"
         except:
@@ -174,9 +176,14 @@ def show_buggies():
 # a placeholder page for editing the buggy: you'll need
 # to change this when you tackle task 2-EDIT
 #------------------------------------------------------------
-@app.route('/edit')
-def edit_buggy():
-    return render_template("buggy-form.html")
+@app.route('/edit/<buggy_id>')
+def edit_buggy(buggy_id):
+    con = sql.connect(DATABASE_FILE)
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM buggies WHERE id=?", (buggy_id,))
+    record = cur.fetchone(); 
+    return render_template("buggy-form.html", buggy = record)
 
 @app.route('/updated')
 def update_buggy():

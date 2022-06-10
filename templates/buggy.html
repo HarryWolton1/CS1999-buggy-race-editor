@@ -13,6 +13,9 @@
         <td>Wheels:</td> <td> {{ buggy['qty_wheels'] }} </td>
       </tr>
       <tr>
+        <td>wheel type:</td> <td> {{ buggy['tyres'] }} </td>
+      </tr>
+      <tr>
         <td>flag color</td> <td> {{ buggy['flag_color'] }}</td>
       </tr>
       <tr>
@@ -23,6 +26,9 @@
       </tr>
       <tr>
         <td>cost</td> <td> {{ buggy['price'] }}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><a href="/edit/{{ buggy['id'] }}" >edit me</a></td>
       </tr>
     </table>
   {% endfor %}
