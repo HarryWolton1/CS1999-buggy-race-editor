@@ -34,6 +34,18 @@
         <td colspan="2"><a href="/delete/{{ buggy['id'] }}"> delete me</a></td>
       </tr>
     </table>
+    <canvas id="display_flag" width="200" height="100" style="border: 1px solid #000000 ;"></canvas>
+    <script>
+      var c = document.getElementById("display_flag");
+      var ctx = c.getContext("2d");
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(200, 100);
+      cxt.moveTo(0,0) ; 
+      cxt.lineTo(100,100);
+      ctx.stroke();
+
+      </script>
   {% endfor %}
   <p>
     <a href="/" class="button">home</a>

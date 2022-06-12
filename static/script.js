@@ -89,3 +89,17 @@ function buggy_list(buggy) {
     text =+ "</select>"
     document.getElementById("buggy_select").innerHTML = text ; // adds the text into the html page
 }
+
+
+//------------------------------------------------------------
+// buggy.html
+//------------------------------------------------------------
+
+// broken
+function draw_on_canvas() {
+    var canvas = document.getElementById(display_flag) ;
+    var canvas_edit = canvas.getcontext("2d") ;
+    
+    canvas_edit.moveTo(0,0) ; 
+    canvas_edit.lineTo(200,100)
+}
