@@ -177,3 +177,6 @@ you'll investigate other ways of doing this.
 
 ### Switching enviroments 
 
+
+### Notes for solving 
+> api buggy route 
