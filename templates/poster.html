@@ -37,7 +37,109 @@
             
             <h3>0-RUN</h3>
             <ul>
-                <li></li>
+                <li>I ran the init_db.py file. This created a database that is used to store the data about the buggy.</li>
+                <li>Next I ran the app.py file. This is the web server that allows the website to be used.</li>
+                <li>Then to access the website I used the 'localhost' url</li>
+            </ul>
+
+            <h3>0-CHANGE</h3>
+            <ul>
+                <li>To complete this task I made a change to index.html.</li>
+                <li>The change I made was a small change to the wording of the heading.</li>
+                <li>Then I reloaded the web page and saw that the change had been successfully made</li>
+            </ul>
+
+
+            <h2>phase 1</h2>
+
+            <h3>1-TEMPLATE</h3>
+            <ul>
+                <li>First I created a new file within the templates file named 'info.html'</li>
+                <li>Next I added the 'extends base.html' and 'block content' commands so the page will extend the script and style from base.html</li>
+                <li>I then attempted to use web scraping to take the data off the buggy race server and place it onto the web page</li>
+            </ul>
+
+            <h3>1-ADD</h3>
+            <ul>
+                <li>To do this I added the buggy attribues that I wanted to add to my form to the init_db.py sql statement. </li>
+                <li>Then I deleted the database and re ran init_db.py. This created the database again with the new attribues.</li>
+                <li>Then I added more fields to the form to allow this data to be collected.</li>
+                <li>I then changed the /new POST method to add these fields to the database when submit is pressed.</li>
+            </ul>
+
+            <h3>1-VALID</h3>
+            <ul>
+                <li>
+                    The first thing i did for this task is when the values where handed from the form to the server I used the .strip() function to remove any white space from 
+                    <br> before or after the string
+                </li>
+                <li>Next I added verification for the amount of wheels being a number by using the .isdidgit() function. If the user does not enter a number they will be sent a message to say it is an invalid input.</li>
+            </ul>
+
+            <h3>1-STYLE</h3>
+            <ul>
+                <li>To do this I changed the font and text color in the css file</li>
+            </ul>
+
+
+            <h2>phase 2</h2>
+
+            <h3>2-EDIT</h3>
+            <ul>
+                <li>To do this I changed the /new GET to open the database and collect the data about the buggy and put it into a variable. </li>
+                <li>Then I used this variable to fill the form with the data using the double curly brackets to change the template</li>
+            </ul>
+
+            <h3>2-FORM</h3>
+            <ul>
+                <li>To do this I changed the way errors are displayed to the user if they enter incorrect data</li>
+                <li>I did this by not opening a seperate error page and instead displaying it at the top of the page using the double curly brackets to change the template and display the message that has been returned from /new POST</li>
+            </ul>
+
+            <h3>2-COST</h3>
+            <ul>
+                <li>First I added a cost attribute in the database using init_db.py using the same emthod as 1-TEMPLATE</li>
+                <li>Then I used the json output of the buggy attribues from the buggy race server to calculate the price of each wheel that the user has selected</li>
+                <li>Then I multiplied this cost per wheel by the amount of wheels that the selected</li>
+                <li>when all the other attributes of the buggy are added to the database this cost attribute is also added</li>
+            </ul>
+
+            <h3>2-RULES</h3>
+            <ul>
+                <li>The first thing I did in this task was to add verification that the number of wheels is even</li>
+                <li>To do this I used the MOD function in python (% symbol is used for this) to calculate the number of wheels MOD 2</li>
+                <li>If this number is zero the number of wheels is valid and therefore this is added to the database</li>
+                <li>If this number is not zero then the user is given a message to say they have entered an ivalid input and are prompted to give a new input</li>
+                <li>Also I added a test to check the cost of the buggy is below a max cosy</li>
+                <li>If it is above the max cost the user is given a message and prompted to enter new values</li>
+            </ul>
+
+            <h3>3-ENV</h3>
+            <ul>
+                <li>In this task I changed the server from the development enviroment between the production enviroment and development enviroment</li>
+                <li>To do this I entered 'FLASK_ENV=development python3 app.py' to run the server in development mode and 'FLASK_ENV=production python3 app.py' to run it in production mode</li>
+                <li>This is important as it means that the server will handle errors in a different way when in development mode.</li>
+            </ul>
+
+            <h3>3-AUTOFILL</h3>
+            <ul>
+                <li>To complete this task I designed the /new GET request to download the defaults JSON object from the buggy race server.</li>
+                <li>I then autofilled the buggy form with this data when it is loaded</li>
+            </ul>
+
+            <h3>3-MULTI</h3>
+            <ul>
+                <li>First I changed the update statement to an insert statement to allow for the creation of new buggies</li>
+                <li>Then I added a link in the page where the buggies are displayed to the form.</li>
+                <li>When this link is pressed it will take the user to the form which will be pre populated with the attributes of that buggy</li>
+                <li>When they submit the form the buggy that has been selected will be edited</li>
+            </ul>
+
+            <h3>3-DELETE</h3>
+            <ul>
+                <li>First I added a button at the bottom of each of the buggies tables.</li>
+                <li>When the user presses this button they will be linked to delete.html and will get a confirmation message that the buggy has been deleted</li>
+                <li>This is because when the delete page is opened the server will run a function that will delete the buggy that is liked to in the url</li>
             </ul>
         </div>
     </body>

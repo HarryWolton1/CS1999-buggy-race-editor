@@ -7,7 +7,9 @@ import os
 import sqlite3 as sql
 from urllib.request import urlopen 
 import json
-
+import requests
+from bs4 import BeautifulSoup
+from flask import Markup
 
 # app - The flask application where all the magical things are configured.
 app = Flask(__name__)
@@ -29,7 +31,12 @@ def home():
 #------------------------------------------------------------
 @app.route('/info')
 def show_info():
-    return render_template("info.html")
+    URL = 'https://rhul.buggyrace.net/specs/data'
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    data = soup.find(id='type-power_type')
+    data = Markup(data)
+    return render_template("info.html", data = data)
 
 #------------------------------------------------------------
 # getting the specifications from the buggy race server
