@@ -48,11 +48,11 @@
       console.log(flag_color_secondary) ;
 
       if (flag_pattern == 'checker') {
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(200, 100);
-      ctx.lineTo(10,10);
-      ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = flag_color_secondary ;
+        ctx.fillStyle = flag_color ; 
+        ctx.rect(5,5,50,50);
+        ctx.stroke ;
       } else if (flag_pattern == 'dstripe') {
         ctx.beginPath();
         ctx.moveTo(0,0) ;
@@ -62,25 +62,25 @@
         ctx.stroke() ;
       } else if (flag_pattern == 'hstripe') {
         ctx.beginPath();
+        ctx.strokeStyle = flag_color_secondary ;
+        ctx.fillStyle = flag_color ; 
         ctx.moveTo(0,50);
         ctx.lineTo(200,50);
-        ctx.strokeStyle = flag_color_secondary ;
-        ctx.fillStyle = flag_color ; 
         ctx.stroke() ;
       } else if (flag_pattern == 'plain') {
-
+        ctx.fillStyle = flag_color;
       } else if (flag_pattern == 'spot') {
         ctx.beginPath();
-        ctx.arc(95, 50, 40, 0, 2 * Math.PI);
         ctx.strokeStyle = flag_color_secondary ;
         ctx.fillStyle = flag_color ; 
+        ctx.arc(95, 50, 40, 0, 2 * Math.PI);
         ctx.stroke();
       } else if (flag_pattern == 'vstripe') {
         ctx.beginPath();
-        ctx.moveTo(100,0);
-        ctx.lineTo(100,100);
         ctx.strokeStyle = flag_color_secondary ;
         ctx.fillStyle = flag_color ; 
+        ctx.moveTo(100,0);
+        ctx.lineTo(100,100);
         ctx.stroke() ;
       } else {
         ctx.font = "30px Arial";
