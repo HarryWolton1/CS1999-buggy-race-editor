@@ -47,22 +47,33 @@
       var flag_color_secondary = document.getElementById("flag_color_secondary").value ;
       console.log(flag_color_secondary) ;
 
-      if (flag_pattern = 'checker') {
+      if (flag_pattern == 'checker') {
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(200, 100);
       ctx.lineTo(10,10);
       ctx.stroke();
-      } else if (flag_pattern = 'dstripe') {
+      } else if (flag_pattern == 'dstripe') {
+        ctx.beginPath();
+        ctx.moveTo(0,0) ;
+        ctx.lineTo(200,100) ;
+        ctx.stroke() ;
+      } else if (flag_pattern == 'hstripe') {
+        ctx.beginPath();
+        ctx.moveTo(0,50);
+        ctx.lineTo(200,50);
+        ctx.stroke() ;
+      } else if (flag_pattern == 'plain') {
 
-      } else if (flag_pattern = 'hstripe') {
-
-      } else if (flag_pattern = 'plain') {
-
-      } else if (flag_pattern = 'spot') {
-
-      } else if (flag_pattern = 'vstripe') {
-
+      } else if (flag_pattern == 'spot') {
+        ctx.beginPath();
+        ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+        ctx.stroke();
+      } else if (flag_pattern == 'vstripe') {
+        ctx.beginPath();
+        ctx.moveTo(100,0);
+        ctx.lineTo(100,100);
+        ctx.stroke() ;
       } else {
         ctx.font = "30px Arial";
         ctx.fillText("ERROR", 10, 50);
