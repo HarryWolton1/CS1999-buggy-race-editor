@@ -16,13 +16,13 @@
         <td>wheel type:</td> <td> {{ buggy['tyres'] }} </td>
       </tr>
       <tr>
-        <td>flag color</td> <td> {{ buggy['flag_color'] }}</td>
+        <td>flag color</td> <td id="flag_color"> {{ buggy['flag_color'] }}</td>
       </tr>
       <tr>
-        <td>flag colour Secondary</td> <td> {{ buggy['flag_color_secondary'] }} </td>
+        <td>flag colour Secondary</td> <td id="flag_color_secondary"> {{ buggy['flag_color_secondary'] }} </td>
       </tr>
       <tr>
-        <td>flag pattern</td> <td> {{ buggy['flag_pattern'] }}</td>
+        <td>flag pattern</td> <td id="flag_pattern"> {{ buggy['flag_pattern'] }}</td>
       </tr>
       <tr>
         <td>cost</td> <td> {{ buggy['price'] }}</td>
@@ -35,17 +35,42 @@
       </tr>
     </table>
     <canvas id="display_flag" width="200" height="100" style="border: 1px solid #000000 ;"></canvas>
+
+    <!-- Script to draw the flag -->
     <script>
       var c = document.getElementById("display_flag");
       var ctx = c.getContext("2d");
+      var flag_pattern = document.getElementById("flag_pattern").value ;
+      console.log(flag_pattern) ; 
+      var flag_color = document.getElementById("flag_color").value ;
+      console.log(flag_color) ;
+      var flag_color_secondary = document.getElementById("flag_color_secondary").value ;
+      console.log(flag_color_secondary) ;
+
+      if (flag_pattern = 'checker') {
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(200, 100);
-      cxt.moveTo(0,0) ; 
-      cxt.lineTo(100,100);
+      ctx.lineTo(10,10);
       ctx.stroke();
+      } else if (flag_pattern = 'dstripe') {
+
+      } else if (flag_pattern = 'hstripe') {
+
+      } else if (flag_pattern = 'plain') {
+
+      } else if (flag_pattern = 'spot') {
+
+      } else if (flag_pattern = 'vstripe') {
+
+      } else {
+        ctx.font = "30px Arial";
+        ctx.fillText("ERROR", 10, 50);
+      }
+
 
       </script>
+
   {% endfor %}
   <p>
     <a href="/" class="button">home</a>
