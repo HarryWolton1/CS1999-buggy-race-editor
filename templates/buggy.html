@@ -34,7 +34,7 @@
         <td colspan="2"><a href="/delete/{{ buggy['id'] }}"> delete me</a></td>
       </tr>
     </table>
-    <canvas id="display_flag" width="200" height="100" style="border: 1px solid #000000 ;"></canvas>
+    <canvas id="display_flag" width="200" height="100" style="border: 1px solid ;"></canvas>
 
     <!-- Script to draw the flag -->
     <script>
@@ -57,22 +57,30 @@
         ctx.beginPath();
         ctx.moveTo(0,0) ;
         ctx.lineTo(200,100) ;
+        ctx.strokeStyle = flag_color_secondary ;
+        ctx.fillStyle = flag_color ; 
         ctx.stroke() ;
       } else if (flag_pattern == 'hstripe') {
         ctx.beginPath();
         ctx.moveTo(0,50);
         ctx.lineTo(200,50);
+        ctx.strokeStyle = flag_color_secondary ;
+        ctx.fillStyle = flag_color ; 
         ctx.stroke() ;
       } else if (flag_pattern == 'plain') {
 
       } else if (flag_pattern == 'spot') {
         ctx.beginPath();
         ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+        ctx.strokeStyle = flag_color_secondary ;
+        ctx.fillStyle = flag_color ; 
         ctx.stroke();
       } else if (flag_pattern == 'vstripe') {
         ctx.beginPath();
         ctx.moveTo(100,0);
         ctx.lineTo(100,100);
+        ctx.strokeStyle = flag_color_secondary ;
+        ctx.fillStyle = flag_color ; 
         ctx.stroke() ;
       } else {
         ctx.font = "30px Arial";
