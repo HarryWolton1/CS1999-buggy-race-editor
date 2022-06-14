@@ -31,12 +31,53 @@ def home():
 #------------------------------------------------------------
 @app.route('/info')
 def show_info():
-    URL = 'https://rhul.buggyrace.net/specs/data'
-    page = requests.get(URL)
-    soup = BeautifulSoup(page.content, 'html.parser')
-    data = soup.find(id='type-power_type')
-    data = Markup(data)
-    return render_template("info.html", data = data)
+    res = requests.get(
+       'https://rhul.buggyrace.net/specs/data?extra=mass'
+    )
+    soup = BeautifulSoup(res.content, 'html.parser')
+
+    #scrapes power table from https://rhul.buggyrace.net/specs/data?extra=mass
+    power_header = soup.find('h3', {'id':'type-power_type'}) 
+    power_table = power_header.find_next('table')
+    power = Markup(power_table)
+    
+
+    #scrapes tyre table from https://rhul.buggyrace.net/specs/data?extra=mass
+    tyre_header = soup.find('h3', {'id':'type-tyres'})
+    tyre_table = tyre_header.find_next('table')
+    tyre = Markup(tyre_table)
+
+    #scrapes armour table from https://rhul.buggyrace.net/specs/data?extra=mass
+    armour_header = soup.find('h3', {'id':'type-armour'})
+    armour_table = armour_header.find_next('table')
+    armour = Markup(armour_table)
+
+    #scrapes attack table from https://rhul.buggyrace.net/specs/data?extra=mass
+    attack_header = soup.find('h3', {'id':'type-attack'})
+    attack_table = attack_header.find_next('table')
+    attack = Markup(attack_table)
+
+    #scrapes algo table from https://rhul.buggyrace.net/specs/data?extra=mass
+    algo_header = soup.find('h3', {'id':'type-algo'})
+    algo_table = algo_header.find_next('table')
+    algo = Markup(algo_table)
+
+    #scrapes flag-pattern table from https://rhul.buggyrace.net/specs/data?extra=mass
+    flag_pattern_header = soup.find('h3', {'id':'type-flag_pattern'})
+    flag_pattern_table = flag_pattern_header.find_next('table')
+    flag_pattern = Markup(flag_pattern_table)
+
+    #scrapes special table from https://rhul.buggyrace.net/specs/data?extra=mass
+    special_header = soup.find('h3', {'id':'type-special'})
+    special_table = special_header.find_next('table')
+    special = Markup(special_table)
+
+    #scrapes defaults table from https://rhul.buggyrace.net/specs/data?extra=mass
+    defaults_header = soup.find('h2', {'id':'defaults'})
+    defaults_table = defaults_header.find_next('table')
+    defaults = Markup(defaults_table)
+
+    return render_template("info.html", power=power, tyre=tyre, armour=armour, attack=attack, algo=algo, flag_pattern=flag_pattern, special=special, defaults=defaults)
 
 #------------------------------------------------------------
 # getting the specifications from the buggy race server
