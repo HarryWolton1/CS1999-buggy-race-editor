@@ -134,12 +134,19 @@ def create_buggy():
         #checks if qty_wheels is a number
         if not qty_wheels.isdigit():
             msg = "wheel quantity should be a number"
-            con = sql.connect(DATABASE_FILE)
-            con.row_factory = sql.Row
-            cur = con.cursor()
-            cur.execute("SELECT * FROM buggies")
-            record = cur.fetchone()
-            return render_template("buggy-form.html", msg = msg, buggy = record)
+            #con = sql.connect(DATABASE_FILE)
+            #con.row_factory = sql.Row
+            #cur = con.cursor()
+            #cur.execute("SELECT * FROM buggies")
+            #record = cur.fetchone()
+            buggy = {
+                'qty_wheels' : qty_wheels,
+                'tyres' : tyre,
+                'flag_color' : flag_color,
+                'flag_color_secondary' : flag_color_secondary,
+                'flag_pattern' : flag_pattern
+            }
+            return render_template("buggy-form.html", msg = msg, buggy = buggy)
         else:
             qty_wheels = int(qty_wheels)
 
@@ -147,12 +154,20 @@ def create_buggy():
         #checks number of wheels is even number
         if (qty_wheels % 2) != 0 :
             msg = "wheel quantity must be even"
-            con = sql.connect(DATABASE_FILE)
-            con.row_factory = sql.Row
-            cur = con.cursor()
-            cur.execute("SELECT * FROM buggies")
-            records = cur.fetchall()
-            return render_template("buggy-form.html", msg = msg, buggies = records)            
+            buggy = {
+                'qty_wheels' : qty_wheels,
+                'tyres' : tyre,
+                'flag_color' : flag_color,
+                'flag_color_secondary' : flag_color_secondary,
+                'flag_pattern' : flag_pattern
+            }
+            #con = sql.connect(DATABASE_FILE)
+            #con.row_factory = sql.Row
+            #cur = con.cursor()
+            #cur.execute("SELECT * FROM buggies")
+            #records = cur.fetchall()
+            
+            return render_template("buggy-form.html", msg = msg, buggy = buggy)            
 
 
 
