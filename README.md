@@ -175,8 +175,6 @@ you'll investigate other ways of doing this.
 
 *RHUL CS1999... that's a course number, not a year* ;-)
 
-### Switching enviroments 
 
 
-### Notes for solving 
-> api buggy route 
+
