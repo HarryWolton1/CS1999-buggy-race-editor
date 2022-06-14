@@ -175,6 +175,7 @@ you'll investigate other ways of doing this.
 
 *RHUL CS1999... that's a course number, not a year* ;-)
 
-
+### switching enviroments 
+please note that server automatically runs in the **production** enviroment. If you would like to run it in the development enviroment please enter `FLASK_ENV=development python3 app.py` when starting the server
 
 
